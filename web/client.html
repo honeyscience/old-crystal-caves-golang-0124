@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function startConnection(form) {
+                console.log("Client started!")
+                websocket = new WebSocket("ws://" + form.Server.value, "json")
+                var msg = {
+                    type: "connect",
+                    username: form.Username.value
+                }
+                websocket.onopen = function (event) {
+                    websocket.send(JSON.stringify(msg))
+                    console.log("Client connected!")
+                }
+                websocket.onmessage = function (event) {
+                    // handle message
+                    console.log(event);
+                }
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <form action="" onsubmit="return startConnection(this);">
+            <p>Username</p>
+            <input type="text" name="Username">
+            <p>Server Address</p>
+            <input type="text" name="Server">
+            <input type="submit" name="Submit" value="Start">
+        </form>
+        <p>Status</p>
+        <div id="status"></div>
+    </body>
+</html>
