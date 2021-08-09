@@ -1,9 +1,10 @@
 package state
 
 type Game struct {
-   // player list
-   // enemy list
-   // goal(crystal) list
+   players  []Player
+   enemies  []Enemy
+   goals    []Goal
+
    // current game time
    // start clock time
 }
